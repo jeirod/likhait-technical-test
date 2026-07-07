@@ -130,8 +130,10 @@ export function CalendarExpenseTable({
           </tr>
         </thead>
         <tbody>
-          {currentExpenses.map((expense) => (
-            <tr key={expense.id}>
+          {[...currentExpenses] // clone to avoid mutating original
+          .sort((oldDate, newDate) => new Date(newDate.date).getTime() - new Date(oldDate.date).getTime())
+          .map((expense) => (
+            <tr key={expense.date}>
               <td style={tdStyle}>{formatDate(new Date(expense.date))}</td>
               <td style={tdStyle}>{expense.description}</td>
               <td style={tdStyle}>
