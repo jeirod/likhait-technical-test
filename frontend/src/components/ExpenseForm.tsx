@@ -55,6 +55,8 @@ export function ExpenseForm({
     label: category,
   }));
 
+  const [isDateDisabled, setIsDateDisabled] = useState(false);
+
   const handleAddCategory = async () => {
     if (!newCategoryName.trim()) return;
 
@@ -135,6 +137,8 @@ export function ExpenseForm({
         error={errors.date}
         fullWidth
         required
+        max={new Date().toISOString().split("T")[0]}
+        disabled={isDateDisabled}
       />
 
       <div style={buttonGroupStyle}>
